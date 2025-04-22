@@ -136,6 +136,6 @@ cloudinary.config(
     api_secret="oWdXLf-pmabEcGSN-zrIrkvEhMo"
 )
 
-# LOGIN_URL = "/login"
-# LOGIN_REDIRECT_URL = "/Home"
-# LOGOUT_REDIRECT_URL = "/Home/"
+LOGIN_URL = "/login"
+LOGIN_REDIRECT_URL = "/home"
+LOGOUT_REDIRECT_URL = "/home/"
