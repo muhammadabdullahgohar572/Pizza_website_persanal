@@ -2,7 +2,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from .models import Pizza, PizzaCategory, Cart, CartItem
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
-
+from django.contrib.auth.models import User
 
 def Home(request):
     pizza = Pizza.objects.all()
@@ -21,6 +21,26 @@ def Register(request):
         if password1 !=password2 :
             messages.error(request,"Passwords do not match")
             return redirect("Register")
+        
+        if User.objects.filter(username=username).exists():
+            messages.error(request,"User name is  Already Exit")
+            return redirect("Register")
+        
+        if User.objects.filter(email=email).exists():
+            messages.error(request,"Email is Already Exit")
+            return redirect("Register")
+        
+        user=User.objects.create_user(
+            first_name=first_name,
+            last_name=last_name,
+            username=username,
+            email=email,
+            password=password1,
+            
+        )
+        messages.success(request,"User Account succussfully")
+        return redirect("Login")
+        
         
     return render(request, "register.html")
 
