@@ -40,15 +40,16 @@ class Pizza(BaseModel):
 
 
 class Cart(BaseModel):
-    cart = models.ForeignKey(
+    user= models.ForeignKey(
         User, on_delete=models.SET_NULL, null=True, blank=True, related_name="carts"
     )
     is_paid = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return f"Pizza Category {self.cart}"
-
+        return f"Pizza Category {self.user}"
+    def get_cart_total(self):
+        return sum(item.Pizza.price for item in self.cart_items.all())
 
 class CartItem(BaseModel):
     Pizza = models.ForeignKey(Pizza, on_delete=models.CASCADE)
@@ -56,3 +57,6 @@ class CartItem(BaseModel):
 
     def __str__(self):
         return f"{self.cart}, {self.Pizza}"
+
+
+

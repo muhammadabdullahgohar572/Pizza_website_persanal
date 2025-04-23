@@ -21,7 +21,7 @@
             </div>
             <p class="card-text mb-3">Price: Rs {{ pizza.price }}</p>
             <div class="mt-auto">
-              <a href="#" class="btn btn-success btn-sm w-100">
+              <a href="{% url 'Add_to_cart' pizza.uid %}" class="btn btn-success btn-sm w-100">
                 <i class="fas fa-cart-plus me-1"></i> Add to Cart
               </a>
             </div>
@@ -50,7 +50,7 @@
             </div>
             <p class="card-text mb-3">Price: Rs {{ pizza.price }}</p>
             <div class="mt-auto">
-              <a href="#" class="btn btn-danger btn-sm w-100">
+              <a href="{% url 'Add_to_cart' pizza.uid %}" class="btn btn-danger btn-sm w-100">
                 <i class="fas fa-cart-plus me-1"></i> Add to Cart
               </a>
             </div>

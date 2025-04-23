@@ -333,9 +333,9 @@
             </li>
 
             <li class="nav-item">
-              <a href="" class="nav-btn btn-cart btn-pulse">
+              <a href="{% url 'cart' %}" class="nav-btn btn-cart btn-pulse">
                 <i class="fas fa-shopping-cart"></i>
-                <span class="cart-count">{{ user.cart.items.count }}</span>
+                <span class="cart-count">{{ user.user_cart_count}}</span>
               </a>
             </li>
 

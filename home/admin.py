@@ -4,7 +4,7 @@ from .models import Pizza,PizzaCategory,Cart,CartItem
 
 
 class CartAdmin(admin.ModelAdmin):
-    list_display=['cart','is_paid','created_at']
+    list_display=['user','is_paid','created_at']
     list_filter = ('is_paid',)
     search_fields = ('user__username',)
     

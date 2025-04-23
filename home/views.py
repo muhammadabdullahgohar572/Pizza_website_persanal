@@ -69,3 +69,38 @@ def Login(request):
 def Logout(request):
     logout(request)
     return redirect("home-page")
+
+
+def cart(request):
+    try:
+        cart = Cart.objects.get(user=request.user, is_paid=False)
+        return render(request, "cart.html", {"cart": cart})
+    except Cart.DoesNotExist:
+        return render(request, "cart.html", {"cart": None})
+    
+ 
+    
+    
+def Add_to_cart(request,pizza_uid):
+    user=request.user;
+    pizza_obj=Pizza.objects.get(uid=pizza_uid)
+    cart,_=Cart.objects.get_or_create(user=user,is_paid=False)
+    cart=CartItem.objects.create(
+      Pizza=pizza_obj,
+      cart=cart
+    )   
+    return redirect ("/home")    
+    
+    
+    
+    
+    
+def RemoveItem(request, item_uid):
+    try:
+        cart_item = get_object_or_404(CartItem, uid=item_uid, cart__user=request.user)
+        cart_item.delete()
+        messages.success(request, "Item removed from cart")   
+        return redirect('cart')
+    except Exception as e:
+        messages.error(request, "Error removing item from cart")
+        return redirect('cart')
