@@ -57,6 +57,13 @@ class CartItem(BaseModel):
 
     def __str__(self):
         return f"{self.cart}, {self.Pizza}"
-
-
-
+class OrderDetails(models.Model):
+    cart = models.OneToOneField(Cart, on_delete=models.CASCADE, related_name='order_details')
+    full_name = models.CharField(max_length=100)
+    address = models.TextField()
+    phone = models.CharField(max_length=15)
+    payment_method = models.CharField(max_length=20, choices=(
+        ('online', 'Online Payment'),
+        ('cod', 'Cash on Delivery')
+    ))
+    created_at = models.DateTimeField(auto_now_add=True)

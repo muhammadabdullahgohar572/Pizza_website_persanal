@@ -9,7 +9,8 @@ urlpatterns = [
     path('Register/',views.Register,name="Register"),
     path("cart/",views.cart,name="cart"),
     path("Add_to_cart/<pizza_uid>",views.Add_to_cart,name="Add_to_cart"),
-    path("RemoveItem/<uuid:item_uid>/", views.RemoveItem, name="RemoveItem")
-    
+    path("RemoveItem/<uuid:item_uid>/", views.RemoveItem, name="RemoveItem"),
+    path("oder/", views.Order, name="oder"),
+    path('checkout/', views.checkout, name='checkout'),
     
 ]
