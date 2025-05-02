@@ -25,9 +25,9 @@ SECRET_KEY = 'django-insecure-&yz5tkjl+pb0ms1so#$ywp2+x#0rfv*tp#f6wyy@)%#-(u0^5n
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
-
+import os
 # Application definition
 
 INSTALLED_APPS = [
@@ -40,8 +40,10 @@ INSTALLED_APPS = [
     'cloudinary',
     'home',
 ]
+STATIC_ROOT=os.path.join(BASE_DIR,'staticfiles')
 
 MIDDLEWARE = [
+    "whitenoise.middleware.WhiteNoiseMiddleware",
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -75,13 +77,26 @@ WSGI_APPLICATION = 'Pizza.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
+
+
+
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'koyebdb',
+        'USER': 'koyeb-adm',
+        'PASSWORD': 'npg_njJw2AkFbY5Q',
+        'HOST': 'ep-quiet-moon-a2al1ig9.eu-central-1.pg.koyeb.app',
+        'OPTIONS': {'sslmode': 'require'},
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
@@ -139,3 +154,11 @@ cloudinary.config(
 LOGIN_URL = "/login"
 LOGIN_REDIRECT_URL = "/home"
 LOGOUT_REDIRECT_URL = "/home/"
+
+
+STORAGES = {
+    # ...
+    "staticfiles": {
+        "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
+    },
+}
